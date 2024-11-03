@@ -20,7 +20,7 @@ module f1_fsm (
             S7: data_out = 8'b1111111;
             S8: data_out = 8'b11111111;
         endcase
-    always_ff @(posedge clk)
+    always_ff @(posedge clk, posedge rst)
         if (rst) current_state <= S0;
         else     current_state <= next_state;
 
