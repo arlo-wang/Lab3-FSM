@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# cleanup
+rm -rf obj_dir
+rm -f *.vcd
+
 # Translate Verilog -> C++ including testbench
 verilator   -Wall --trace \
             -cc f1_fsm.sv \
@@ -14,4 +18,3 @@ make -j -C obj_dir/ -f Vdut.mk
 
 # Run executable simulation file
 ./obj_dir/Vdut
-    
