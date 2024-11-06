@@ -8,21 +8,23 @@ module f1_fsm (
     typedef enum {S0, S1, S2, S3, S4, S5, S6, S7, S8} my_state;
     my_state current_state, next_state;
 
+    always_ff @(posedge clk, posedge rst) begin
+        if (rst)        current_state <= S0;
+        else if (en)    current_state <= next_state;
+    end
+
     always_comb
         case (current_state)
-            S0: data_out = 8'b0;
-            S1: data_out = 8'b1;
-            S2: data_out = 8'b11;
-            S3: data_out = 8'b111;
-            S4: data_out = 8'b1111;
-            S5: data_out = 8'b11111;
-            S6: data_out = 8'b111111;
-            S7: data_out = 8'b1111111;
+            S0: data_out = 8'b00000000;
+            S1: data_out = 8'b00000001;
+            S2: data_out = 8'b00000011;
+            S3: data_out = 8'b00000111;
+            S4: data_out = 8'b00001111;
+            S5: data_out = 8'b00011111;
+            S6: data_out = 8'b00111111;
+            S7: data_out = 8'b01111111;
             S8: data_out = 8'b11111111;
         endcase
-    always_ff @(posedge clk, posedge rst)
-        if (rst) current_state <= S0;
-        else     current_state <= next_state;
 
     always_comb begin
         case (current_state)
