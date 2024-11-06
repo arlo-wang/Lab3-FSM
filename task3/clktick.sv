@@ -11,7 +11,7 @@ module clktick #(
 
 logic [WIDTH-1:0] count;
 
-always_ff @ (posedge clk)
+always_ff @ (posedge clk, posedge rst)
     if (rst) begin
         tick <= 1'b0;
         count <= N;  
